@@ -26,7 +26,11 @@ public class App
         System.out.println("Account Balance of fixed deposit =" + account2.getAccountBalance());
 
         System.out.println(account2.toString());
+        account2.setInterest(6);
+        //account2.setInterest(10);
 
+        account2.setDuration(18);
+        account2.setDuration(10);
 
     }
 }

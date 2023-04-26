@@ -3,6 +3,8 @@ package sg.nus.edu.iss;
 public class FixedDepositAccount extends BankAccount{
     private float interest;
     private int duration;
+    private boolean isInterestSet=false;
+    private boolean isDurationSet=false;
 
     public FixedDepositAccount(String accountName, float accountBalance) {
         super(accountName, accountBalance);
@@ -26,14 +28,31 @@ public class FixedDepositAccount extends BankAccount{
     public float getInterest() {
         return interest;
     }
+
+    // can probably put more if conditions like no negative interest or < certain limit
     public void setInterest(float interest) {
-        this.interest = interest;
+        if (!isInterestSet){
+            this.interest = interest;
+            System.out.println("Interest has been changed to "+ this.interest+"%");
+            isInterestSet = true;
+        }else{
+            throw new IllegalArgumentException("Interest has been changed once and cannot be changed again");
+        }
     }
+
     public int getDuration() {
         return duration;
     }
+
+    // can probably put more if conditions like no negative duration
     public void setDuration(int duration) {
-        this.duration = duration;
+        if (!isDurationSet){
+            this.duration = duration;
+            System.out.println("Duration has been changed to "+ this.duration+" months");
+            isDurationSet = true;
+        }else{
+            throw new IllegalArgumentException("Duration has been changed once and cannot be changed again");
+        }
     }
 
     @Override
