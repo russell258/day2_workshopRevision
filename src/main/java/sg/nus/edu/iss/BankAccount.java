@@ -2,6 +2,7 @@ package sg.nus.edu.iss;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 //create getter setter
 // create constructor n params
@@ -11,9 +12,9 @@ import java.util.Date;
 public class BankAccount {
     private String accountName;
     private String accountNumber; //randomly genereated
-    private Float accountBalance; // check whether to use primitive or wrapper
+    private float accountBalance; // check whether to use primitive or wrapper
     private ArrayList<String> accountTransactions; //should be arraylist cos will add on or append
-    private Boolean isClosed;
+    private boolean isClosed;
     private Date accountCreatedDate;
     private Date accountClosedDate;
 
@@ -25,6 +26,9 @@ public class BankAccount {
         this.accountBalance = 0.0f;
         this.isClosed = false;
         this.accountTransactions = new ArrayList<>();
+        this.accountNumber = UUID.randomUUID().toString();
+        java.util.Date date = new java.util.Date();
+        this.setAccountCreatedDate(date);
     }
 
     public BankAccount(String accountName,  Float accountBalance) {
@@ -32,22 +36,28 @@ public class BankAccount {
         this.accountBalance = accountBalance;
         this.isClosed = false;
         this.accountTransactions = new ArrayList<>();
+        this.accountNumber = UUID.randomUUID().toString().toUpperCase();
+        java.util.Date date = new java.util.Date();
+        this.setAccountCreatedDate(date);
     }
 
 
     public String getAccountName() {
         return accountName;
     }
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
-    }
+
+    // accountName cannot be set once it has been set in creation so remove it
+    // public void setAccountName(String accountName) {
+    //     this.accountName = accountName;
+    // }
     public String getAccountNumber() {
         return accountNumber;
     }
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-    public Float getAccountBalance() {
+    // accountNumber cannot be set once it has been set in creation so remove it
+    // public void setAccountNumber(String accountNumber) {
+    //     this.accountNumber = accountNumber;
+    // }
+    public float getAccountBalance() {
         return accountBalance;
     }
     public void setAccountBalance(Float accountBalance) {
@@ -62,6 +72,10 @@ public class BankAccount {
     }
     public void setIsClosed(Boolean isClosed) {
         this.isClosed = isClosed;
+        if (this.isClosed){
+            java.util.Date date = new java.util.Date();
+            this.setAccountClosedDate(date);
+        }
     }
     public Date getAccountCreatedDate() {
         return accountCreatedDate;
