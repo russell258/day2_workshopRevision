@@ -60,17 +60,17 @@ public class BankAccount {
     public float getAccountBalance() {
         return accountBalance;
     }
-    public void setAccountBalance(Float accountBalance) {
+    public void setAccountBalance(float accountBalance) {
         this.accountBalance = accountBalance;
     }
     public ArrayList<String> getAccountTransactions() {
         return accountTransactions;
     }
 
-    public Boolean getIsClosed() {
+    public boolean getIsClosed() {
         return isClosed;
     }
-    public void setIsClosed(Boolean isClosed) {
+    public void setIsClosed(boolean isClosed) {
         this.isClosed = isClosed;
         if (this.isClosed){
             java.util.Date date = new java.util.Date();
@@ -91,7 +91,7 @@ public class BankAccount {
     }
 
     //deposit method
-    public void deposit(Float depositAmount){
+    public void deposit(float depositAmount){
         if (depositAmount<0){
             System.out.println("Please enter a valid amount");
         }else if (isClosed){
@@ -105,7 +105,7 @@ public class BankAccount {
     }
     
     //withdraw method
-    public void withdraw(Float withdrawAmount){
+    public void withdraw(float withdrawAmount){
         if (withdrawAmount<0){
             System.out.println("Please enter a valid amount");
         }else if (isClosed || withdrawAmount>this.accountBalance){
