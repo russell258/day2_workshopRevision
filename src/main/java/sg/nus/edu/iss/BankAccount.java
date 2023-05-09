@@ -1,26 +1,33 @@
 package sg.nus.edu.iss;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class BankAccount {
     private String name;
     private String accountNumber;
     private float accountBalance;
-    private List<String> accountTransactions;
-    private boolean isClosed;
+    private List<String> accountTransactions = new ArrayList<String>();
+    private boolean isClosed = false;
     private Date accountCreatedDate;
     private Date accountClosedDate;
 
-    public BankAccount(String name, String accountNumber, float accountBalance, List<String> accountTransactions,
-            boolean isClosed, Date accountCreatedDate, Date accountClosedDate) {
+    public BankAccount(String name) {
         this.name = name;
-        this.accountNumber = accountNumber;
+        this.accountNumber = UUID.randomUUID().toString();
+        this.accountBalance = 0.0f;
+        java.util.Date date = new java.util.Date();
+        this.accountCreatedDate = (Date) date;
+    }
+
+    public BankAccount(String name, float accountBalance) {
+        this.name = name;
+        this.accountNumber = UUID.randomUUID().toString().toUpperCase();
         this.accountBalance = accountBalance;
-        this.accountTransactions = accountTransactions;
-        this.isClosed = isClosed;
-        this.accountCreatedDate = accountCreatedDate;
-        this.accountClosedDate = accountClosedDate;
+        java.util.Date date = new java.util.Date();
+        this.accountCreatedDate = date;
     }
 
     public String getName() {
@@ -56,14 +63,36 @@ public class BankAccount {
     public Date getAccountCreatedDate() {
         return accountCreatedDate;
     }
-    public void setAccountCreatedDate(Date accountCreatedDate) {
-        this.accountCreatedDate = accountCreatedDate;
-    }
+    // public void setAccountCreatedDate(Date accountCreatedDate) {
+    //     this.accountCreatedDate = accountCreatedDate;
+    // }
     public Date getAccountClosedDate() {
         return accountClosedDate;
     }
     public void setAccountClosedDate(Date accountClosedDate) {
         this.accountClosedDate = accountClosedDate;
+    }
+
+    public void deposit(float depositAmount){
+        if (depositAmount > 0 && !isClosed){
+            java.util.Date date = new java.util.Date();
+            this.accountBalance += depositAmount;
+            System.out.println("Deposit SGD" + depositAmount + " at " + date);
+            this.accountTransactions.add("Deposit SGD" + depositAmount + " at " + date);
+        }else{
+            throw new IllegalArgumentException("Please enter valid amount");
+        }
+    }
+
+    public void withdraw(float withdrawAmount){
+        if (withdrawAmount > 0 && !isClosed && withdrawAmount<accountBalance){
+            java.util.Date date = new java.util.Date();
+            this.accountBalance -= withdrawAmount;
+            System.out.println("Withdraw SGD" + withdrawAmount + " at " + date);
+            this.accountTransactions.add("withdraw SGD" + withdrawAmount + " at " + date);
+        }else{
+            throw new IllegalArgumentException("Please enter valid amount");
+        }
     }
 
     @Override
