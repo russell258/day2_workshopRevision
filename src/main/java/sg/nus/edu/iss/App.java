@@ -10,7 +10,20 @@ public class App
 
         russell.deposit(9012);
 
-        russell.withdraw(91200);
+        russell.withdraw(900);
         System.out.println(russell.toString());
+
+        FixedDepositAccount meow = new FixedDepositAccount("fixxxxy", 400.0f);
+        System.out.println(meow.toString());
+
+        meow.setInterest(7);
+        meow.setDuration(-12);
+        meow.deposit(333.33f);
+        meow.withdraw(332.1f);
+        meow.getAccountBalance();
+
+        meow.setDuration(-2);
+        meow.setDuration(24);
+        meow.setInterest(10);
     }
 }
